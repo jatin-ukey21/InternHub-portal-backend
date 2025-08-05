@@ -1,4 +1,4 @@
-# InternHub Backend
+# 🌐 InternHub Backend
 
 This is the backend service for the **InternHub Portal**, built using **Spring Boot** and connected to **MongoDB**.
 
@@ -19,6 +19,7 @@ This is the backend service for the **InternHub Portal**, built using **Spring B
 ## 📦 API Endpoints
 
 ### 🔹 `POST /api/registration`
+
 - **Description:** Submits a new applicant form
 - **Request Body (JSON):**
 
@@ -29,19 +30,18 @@ This is the backend service for the **InternHub Portal**, built using **Spring B
   "phone": "1111122222",
   "role": "Intern"
 }
+```
 
-
-* **Behavior:**
-
-  * Automatically sets `submittedAt` field to current timestamp on backend
-  * Saves the record to MongoDB in the `applicants` collection
+- **Behavior:**
+  - Automatically sets `submittedAt` field to current timestamp on backend
+  - Saves the record to MongoDB in the `applicants` collection
 
 ---
 
 ### 🔹 `GET /api/applicants`
 
-* **Description:** Retrieves the list of all submitted applicants
-* **Response:** Array of applicant objects
+- **Description:** Retrieves the list of all submitted applicants
+- **Response:** Array of applicant objects
 
 ```json
 [
@@ -64,15 +64,15 @@ The backend uses a **CommandLineRunner** to clear old data every time the applic
 
 ```java
 @Component
-public class DataCleanupRunner implements CommandLineRunner {
+public class DataCleaner implements CommandLineRunner {
     private final ApplicantRepository applicantRepository;
 
-    public DataCleanupRunner(ApplicantRepository applicantRepository) {
+    public DataCleaner(ApplicantRepository applicantRepository) {
         this.applicantRepository = applicantRepository;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         applicantRepository.deleteAll();
         System.out.println("All applicants deleted on startup.");
     }
@@ -87,26 +87,26 @@ public class DataCleanupRunner implements CommandLineRunner {
 
 ### 📌 Prerequisites:
 
-* Java 17+
-* MongoDB running locally on port `27017` or configured URI
-* Maven installed
+- Java 17+
+- MongoDB running locally on port `27017` or configure your connection URI
+- Maven installed
 
 ### 🔧 Steps:
 
-1. Clone the repo
+1. **Clone the repository:**
 
-   ```
+   ```bash
    git clone https://github.com/jatin-ukey21/InternHub-portal-backend
    cd internhub-backend
    ```
 
-2. Install dependencies & run
+2. **Install dependencies & run:**
 
-   ```
+   ```bash
    ./mvnw spring-boot:run
    ```
 
-3. The backend will be available at:
+3. **Backend runs at:**
 
    ```
    http://localhost:8080
@@ -116,7 +116,7 @@ public class DataCleanupRunner implements CommandLineRunner {
 
 ## 🔐 CORS Configuration
 
-The backend allows Cross-Origin requests (CORS) so that your **React frontend** can access it without issues:
+CORS is enabled to allow your **React frontend** (running at `localhost:5173`) to communicate with the backend without issues:
 
 ```java
 @CrossOrigin(origins = "http://localhost:5173")
@@ -124,37 +124,33 @@ The backend allows Cross-Origin requests (CORS) so that your **React frontend** 
 
 ---
 
-## 📁 Project Structure
+## 📁 Folder Structure
 
 ```
 src/
 └── main/
-    └── java/com/workskill/backend_internhub/
-        ├── config/
-        │   └── DataCleaner.java            # CommandLineRunner to clean DB on startup
-        ├── controllers/
-        │   └── ApplicantController.java    # REST API endpoints (GET, POST)
-        ├── dto/
-        │   └── ApplicantDTO.java           # DTO for form submission
-        ├── entities/
-        │   └── Applicant.java              # MongoDB document entity
-        ├── repositories/
-        │   └── ApplicantRepository.java    # MongoDB repository interface
-        ├── services/
-        │   ├── ApplicantService.java       # Business logic for applicant management
-        │   └── BackendInternhubApplication.java  # Main class with @SpringBootApplication
-
+    ├── java/com/workskill/backend_internhub/
+    │   ├── config/
+    │   │   └── DataCleaner.java               # Clears DB on startup
+    │   ├── controllers/
+    │   │   └── ApplicantController.java       # Handles API requests
+    │   ├── dto/
+    │   │   └── ApplicantDTO.java              # Data Transfer Object
+    │   ├── entities/
+    │   │   └── Applicant.java                 # MongoDB entity
+    │   ├── repositories/
+    │   │   └── ApplicantRepository.java       # MongoDB repository
+    │   ├── services/
+    │   │   ├── ApplicantService.java          # Business logic
+    │   │   └── BackendInternhubApplication.java # Main app class
     └── resources/
         ├── static/
         ├── templates/
-        └── application.properties          # MongoDB connection and config
-
+        └── application.properties             # MongoDB configs
 ```
 
 ---
 
 ## ✨ Author
 
-Made with Jatin Ukey
-
----
+Made by **Jatin Ukey**
