@@ -1,14 +1,13 @@
-````markdown
 # InternHub Backend
 
-This is the backend service for the **InternHub Portal**, built using **Spring Boot** and connected to a **MongoDB** database. It provides APIs to register internship applicants and retrieve submitted applications for the admin panel.
+This is the backend service for the **InternHub Portal**, built using **Spring Boot** and connected to **MongoDB**.
 
 ---
 
 ## 🛠 Tech Stack
 
 - **Spring Boot**
-- **Java 17+**
+- **Java 17**
 - **MongoDB** (NoSQL database)
 - **Lombok** (for model boilerplate)
 - **Spring Web**
@@ -22,6 +21,7 @@ This is the backend service for the **InternHub Portal**, built using **Spring B
 ### 🔹 `POST /api/registration`
 - **Description:** Submits a new applicant form
 - **Request Body (JSON):**
+
 ```json
 {
   "name": "Kalpesh Ukey",
@@ -29,7 +29,7 @@ This is the backend service for the **InternHub Portal**, built using **Spring B
   "phone": "1111122222",
   "role": "Intern"
 }
-````
+
 
 * **Behavior:**
 
